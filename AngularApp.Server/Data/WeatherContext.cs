@@ -1,16 +1,19 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
+using System.Xml;
 
 namespace AngularApp.Server.Data
 {
-    public class WeatherDbContext : DbContext
+    public class WeatherContext : DbContext // Fix: Inherit from DbContext, not itself
     {
-        public WeatherDbContext(DbContextOptions<WeatherDbContext> options)
+        public WeatherContext(DbContextOptions<WeatherContext> options)
             : base(options)
         { }
 
         public DbSet<Forecast> Forecast { get; set; }
+
+        public DbSet<User> User { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -19,6 +22,10 @@ namespace AngularApp.Server.Data
             // Ensure primary key
             modelBuilder.Entity<Forecast>()
                         .HasNoKey();
+
+            // Ensure primary key
+            modelBuilder.Entity<User>()
+           .HasKey(e => e.UserId); 
 
             // Map DateOnly to SQL date (uses ValueConverter)
             var dateConverter = new ValueConverter<DateOnly, DateTime>(

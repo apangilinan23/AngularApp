@@ -1,15 +1,13 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using AngularApp.Server.Data;
+using WeatherContext = AngularApp.Server.Data.WeatherContext;
 
 namespace AngularApp.Server.Services
 {
     public class WeatherForecastRepository : IWeatherForecastRepository
     {
-        private readonly WeatherDbContext _db;
+        private readonly WeatherContext _db;
 
-        public WeatherForecastRepository(WeatherDbContext db)
+        public WeatherForecastRepository(WeatherContext db)
         {
             _db = db;
         }

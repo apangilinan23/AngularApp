@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using AngularApp.Server.Data;
 using AngularApp.Server.Services;
+using AngularApp.Server;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,12 +11,15 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-builder.Services.AddDbContext<WeatherDbContext>(options =>
+builder.Services.AddDbContext<WeatherContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // repository
 builder.Services.AddScoped<IWeatherForecastRepository, WeatherForecastRepository>();
 builder.Services.AddScoped<IWeatherForecastService, WeatherForecastService>();
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 

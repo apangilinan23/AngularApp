@@ -18,6 +18,44 @@ table {
     max-width: 760px; /* narrow width */
     margin-left: auto;
     margin-right: auto;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding: 1.5rem;
+    background: linear-gradient(to bottom right, #ffffff, #f8f9fa);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Professional table styles */
+.forecast-table {
+    margin-bottom: 0 !important;
+    background: transparent;
+    cursor: pointer;
+}
+
+.forecast-table thead th {
+    border-top: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 0.025em;
+    background: linear-gradient(135deg, #2c3e50, #3498db);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.forecast-table tbody tr:nth-child(odd) {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.9));
+}
+
+.forecast-table tbody tr:nth-child(even) {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 1));
+}
+
+.forecast-table tbody tr:hover {
+    background: linear-gradient(to right, rgba(52, 152, 219, 0.05), rgba(52, 152, 219, 0.1));
+}
+
+.forecast-table td {
+    vertical-align: middle;
+    font-size: 0.95rem;
+    border-color: rgba(0, 0, 0, 0.05);
 }

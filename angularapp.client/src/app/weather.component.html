@@ -1,8 +1,11 @@
-<h1 id="tableLabel">Weather forecast</h1>
+<div style="position: relative; display: flex; justify-content: center; align-items: center; margin-top: 1.5rem; margin-bottom: 1rem;">
+  <h1 id="tableLabel" style="margin: 0; text-align: center; width: 100%;">Weather forecast</h1>
+  <button class="btn btn-danger" (click)="onLogout()" style="position: absolute; right: 0;">Logout</button>
+</div>
 
 <p>This component demonstrates fetching data from the server.</p>
 
-<!-- <p *ngIf="!forecasts"><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationangular">https://aka.ms/jspsintegrationangular</a> for more details.</em></p> -->
+<!-- <p *ngIf="!forecasts"><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationangular">https://www.w3.org/TR/html5/syntax.html#closing-elements-that-have-implied-end-tags</a> for more details.</em></p> -->
 
 <!-- Bootstrap responsive table for forecasts -->
 <div class="table-responsive table-container">
@@ -16,7 +19,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let forecast of forecasts">
+            <tr *ngFor="let forecast of forecasts; let i = index" (click)="onEdit(forecast, i)" style="cursor:pointer;">
                 <td class="text-nowrap">{{ forecast.date }}</td>
                 <td class="text-end">{{ forecast.temperatureC }}</td>
                 <td class="text-end">{{ forecast.temperatureF }}</td>
@@ -25,3 +28,10 @@
         </tbody>
     </table>
 </div>
+
+<app-edit-weather-item
+  *ngIf="editingItem"
+  [weatherItem]="editingItem"
+  (save)="onSaveEdit($event)"
+  (cancel)="onCancelEdit()">
+</app-edit-weather-item>

@@ -8,18 +8,21 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { App } from './app';
 import { WeatherComponent } from './weather.component';
+import { EditWeatherItemComponent } from './edit-weather-item.component';
 
 @NgModule({
   declarations: [
     App,
     LoginComponent,
-    WeatherComponent
+    WeatherComponent,
+    EditWeatherItemComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    CommonModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners()

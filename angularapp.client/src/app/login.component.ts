@@ -30,6 +30,7 @@ export class LoginComponent {
       this.loginService.login(username, password).subscribe({
         next: (result: boolean) => {
           if (result) {
+            localStorage.setItem('authToken', `${username}:test-token`);
             this.router.navigate(['/weather']);
           } else {
             this.loginError = 'Invalid username or password';

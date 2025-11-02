@@ -9,15 +9,15 @@ export class LoginService {
   constructor(private http: HttpClient) {}
 
   // Real login API call
-  login(username: string): Observable<boolean> {
+  login(username: string, pword: string): Observable<boolean> {
     const url = `/user?username=${encodeURIComponent(username)}`;
     let responseResult = false;
-    this.http.post<any>(url, null)
+    let loginParam: User = {userName: username, password: pword, result: false};
+    this.http.post<any>(url, loginParam)
       .subscribe({
         next: (response) => {
-          responseResult = response.result;
-          if(response.result){
-            console.log('POST successful:', response);
+          responseResult = response;
+          if(responseResult){
             alert('Login successful!');
           }
           else{
@@ -26,14 +26,12 @@ export class LoginService {
         },
         error: (error) => {
           console.error('There was an error during the POST request!', error);
-          return false;
+          return of(false);
         }
       });
 
       return of(responseResult);
   }
 }
-    // return this.http.post<User>('/user',  username )
-    //   .pipe(map(res => res.result));
 
 

@@ -20,20 +20,10 @@ namespace AngularApp.Server
         }
 
         // Minimal, in-memory login stub. Replace with real user store & token generation.
-        public async Task<UserViewModel> LoginAsync(string userName)
+        public async Task<bool> LoginAsync(UserViewModel model)
         {
-            var user = new UserViewModel
-            {
-                Username = userName,
-            };
-
-            var loginResult = await _userRepository.GetByUsernameAsync(userName);
-            if (loginResult.Result)
-            {
-                user.Result = true;
-            }
-            _logger.LogInformation("User logged in: {Email}", userName);
-            return user;
+            _logger.LogInformation("User logging in: {Email}", model.Username);
+            return await _userRepository.GetUser(model);
         }
 
         // Very simple token check for demo purposes

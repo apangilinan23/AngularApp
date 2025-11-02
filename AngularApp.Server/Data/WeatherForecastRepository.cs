@@ -14,8 +14,13 @@ namespace AngularApp.Server.Services
 
         public async Task<IEnumerable<Forecast>> GetAllAsync()
         {
-            return await _db.Forecast.AsNoTracking().ToListAsync();
+            return await _db.Forecast.ToListAsync();
         }
+
+        //public async Task<Forecast> GetByIdAsync(int id)
+        //{
+        //    return await _db.Forecast.FirstOrDefaultAsync(x => x.Id == id);
+        //}
 
         //public async Task<WeatherForecast?> GetByIdAsync(int id)
         //{

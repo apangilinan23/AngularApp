@@ -21,11 +21,11 @@ namespace AngularApp.Server.Data
 
             // Ensure primary key
             modelBuilder.Entity<Forecast>()
-                        .HasNoKey();
+                        .HasKey(x => x.Id);
 
             // Ensure primary key
             modelBuilder.Entity<User>()
-           .HasKey(e => e.UserId); 
+           .HasKey(e => e.Id); 
 
             // Map DateOnly to SQL date (uses ValueConverter)
             var dateConverter = new ValueConverter<DateOnly, DateTime>(

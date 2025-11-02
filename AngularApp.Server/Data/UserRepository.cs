@@ -2,6 +2,8 @@
 using AngularApp.Server.Services;
 using Azure.Core;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Text;
 
 namespace AngularApp.Server.Data
 {
@@ -14,20 +16,40 @@ namespace AngularApp.Server.Data
             _db = dbContext;
         }
 
-        public async Task<UserViewModel> GetByUsernameAsync(string email)
+        public async Task<IEnumerable<UserViewModel>> GetAllAsync()
         {
-            var result =new UserViewModel();
-            var users = await _db.User.ToListAsync();
-            if (users.Any(u => string.Equals(u.UserName, email, StringComparison.OrdinalIgnoreCase)))
+            return  await _db.User.Select(x => new UserViewModel
             {
-                result = new UserViewModel
+                Result = true,
+                Username = x.UserName
+            }).ToListAsync();
+        }
+
+        public async Task<bool> GetUser(UserViewModel model)
+        {
+            bool result = false;
+            var users = await _db.User.ToListAsync();
+            var user = users.FirstOrDefault(u => string.Equals(u.UserName, model.Username, StringComparison.OrdinalIgnoreCase));
+            if (user != null)
+            {
+                Encoding encoding = Encoding.UTF8;
+                byte[] userLoginPassword = encoding.GetBytes(model.Password);
+                if (user.Password.SequenceEqual(userLoginPassword))
                 {
-                    Username = email,
-                    Result = true
-                };
-               
+                    result = true;
+                }
             }
             return result;
+        }
+
+        public Task<UserViewModel> GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<UserViewModel> GetByIdAsyncz(string email)
+        {
+            throw new NotImplementedException();
         }
     }
 }

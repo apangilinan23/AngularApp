@@ -5,6 +5,6 @@ namespace AngularApp.Server.Services
 {
     public interface IUserService
     {
-        Task<UserViewModel?> LoginAsync(string email);
+        Task<bool> LoginAsync(UserViewModel user);
     }
 }

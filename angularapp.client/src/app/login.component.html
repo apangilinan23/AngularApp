@@ -1,3 +1,22 @@
+<div class="modal-backdrop" *ngIf="loginError">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Login Failed</h5>
+        <button type="button" class="close" aria-label="Close" (click)="loginError = null">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{ loginError }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="loginError = null">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="login-page">
   <div class="login-card">
     <div class="login-header">

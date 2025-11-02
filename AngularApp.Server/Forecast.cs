@@ -6,9 +6,9 @@ namespace AngularApp.Server
 
         public DateOnly Date { get; set; }
 
-        public double TemperatureC { get; set; }
+        public decimal TemperatureC { get; set; }
 
-        public double TemperatureF { get; set; }
+        public decimal TemperatureF { get; set; }
 
         public string? Summary { get; set; }
     }

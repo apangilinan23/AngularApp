@@ -3,22 +3,27 @@ import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing-module';
-import { App } from './app';
 import { LoginComponent } from './login.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { App } from './app';
+import { WeatherComponent } from './weather.component';
 
 @NgModule({
   declarations: [
-    LoginComponent
+    App,
+    LoginComponent,
+    WeatherComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule,
-    AppRoutingModule, ReactiveFormsModule,
-    
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
   ],
   providers: [
     provideBrowserGlobalErrorListeners()
   ],
-  bootstrap: [LoginComponent]
+  bootstrap: [App]
 })
 export class AppModule { }

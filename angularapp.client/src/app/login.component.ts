@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoginService } from './login.service';
 
 @Component({
@@ -12,7 +13,11 @@ export class LoginComponent {
   loginForm: FormGroup;
   loginError: string | null = null;
 
-  constructor(private fb: FormBuilder, private loginService: LoginService) {
+  constructor(
+    private fb: FormBuilder,
+    private loginService: LoginService,
+    private router: Router
+  ) {
     this.loginForm = this.fb.group({
       username: [''],
       password: ['']
@@ -21,14 +26,14 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      const username = this.loginForm.value.username;
-      const password = this.loginForm.value.password;
-      this.loginService.login(username, password).subscribe(success => {
-        if (success) {
-          this.loginError = null;
-          alert('Login successful!');
-        } else {
-          this.loginError = 'Invalid username or password.';
+      const { username, password } = this.loginForm.value;
+      this.loginService.login(username, password).subscribe({
+        next: (result: boolean) => {
+          if (result) {
+            this.router.navigate(['/weather']);
+          } else {
+            this.loginError = 'Invalid username or password';
+          }
         }
       });
     }

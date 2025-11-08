@@ -14,4 +14,8 @@ export class WeatherForecastService {
   getForecasts(): Observable<WeatherForecast[]> {
     return this.http.get<WeatherForecast[]>(this.url);
   }
+
+  saveForecast(forecast: WeatherForecast): Observable<WeatherForecast> {
+    return this.http.post<WeatherForecast>(this.url, forecast);
+  }
 }

@@ -15,7 +15,7 @@ builder.Services.AddDbContext<WeatherContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // repository
-builder.Services.AddScoped<IWeatherForecastRepository, WeatherForecastRepository>();
+builder.Services.AddScoped<IRepository<Forecast>, WeatherForecastRepository>();
 builder.Services.AddScoped<IWeatherForecastService, WeatherForecastService>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();

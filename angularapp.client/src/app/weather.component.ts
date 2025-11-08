@@ -55,4 +55,8 @@ export class WeatherComponent implements OnInit {
     localStorage.clear();
     this.router.navigate(['']);
   }
+
+  onAddWeatherItem() {
+    // TODO: Implement add weather item logic or open modal
+  }
 }

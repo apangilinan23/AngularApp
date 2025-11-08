@@ -6,6 +6,8 @@ namespace AngularApp.Server.Services
     public interface IWeatherForecastService
     {
         Task<IEnumerable<Forecast>> GetAllAsync();
+
+        Task<Forecast> SaveAsync(Forecast item);
         //Task<WeatherForecast?> GetByIdAsync(int id);
         //Task<WeatherForecast> CreateAsync(WeatherForecast forecast);
         //Task<bool> UpdateAsync(WeatherForecast forecast);

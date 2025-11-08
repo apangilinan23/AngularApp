@@ -3,7 +3,7 @@ using WeatherContext = AngularApp.Server.Data.WeatherContext;
 
 namespace AngularApp.Server.Services
 {
-    public class WeatherForecastRepository : IWeatherForecastRepository
+    public class WeatherForecastRepository : IRepository<Forecast>
     {
         private readonly WeatherContext _db;
 
@@ -15,6 +15,20 @@ namespace AngularApp.Server.Services
         public async Task<IEnumerable<Forecast>> GetAllAsync()
         {
             return await _db.Forecast.ToListAsync();
+        }
+
+        public async Task<Forecast> SaveAsync(Forecast item)
+        {
+            var itemInDb = await _db.Forecast.FirstOrDefaultAsync(f => f.Id == item.Id);
+            if (itemInDb == null)
+                return null;
+            itemInDb.TemperatureF = item.TemperatureF;
+            itemInDb.TemperatureC = item.TemperatureC;
+            itemInDb.Date = item.Date;
+            itemInDb.Summary = item.Summary;
+            await _db.SaveChangesAsync();
+
+            return itemInDb;
         }
 
         //public async Task<Forecast> GetByIdAsync(int id)

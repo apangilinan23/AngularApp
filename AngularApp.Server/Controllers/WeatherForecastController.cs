@@ -26,6 +26,12 @@ namespace AngularApp.Server.Controllers
         public async Task<IEnumerable<Forecast>> Get()
         {
             return await _weatherForecastService.GetAllAsync();
-        }   
+        }
+
+        [HttpPost]
+        public async Task<Forecast> Save(Forecast item)
+        {
+            return await _weatherForecastService.SaveAsync(item);
+        }
     }
 }

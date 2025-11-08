@@ -1,16 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-
 namespace AngularApp.Server.Services
 {
     public class WeatherForecastService : IWeatherForecastService
     {
-        private readonly IWeatherForecastRepository _repository;
+        private readonly IRepository<Forecast> _repository;
         private readonly ILogger<WeatherForecastService> _logger;
 
-        public WeatherForecastService(IWeatherForecastRepository repository, ILogger<WeatherForecastService> logger)
+        public WeatherForecastService(IRepository<Forecast> repository, ILogger<WeatherForecastService> logger)
         {
             _repository = repository;
             _logger = logger;
@@ -19,6 +14,11 @@ namespace AngularApp.Server.Services
         public async Task<IEnumerable<Forecast>> GetAllAsync()
         {
             return await _repository.GetAllAsync();
+        }
+
+        public async Task<Forecast> SaveAsync(Forecast item)
+        {
+            return await _repository.SaveAsync(item);
         }
 
         //public async Task<WeatherForecast?> GetByIdAsync(int id)

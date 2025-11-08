@@ -1,7 +1,4 @@
-using AngularApp.Server.Models;
-using System;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
+using AngularApp.Server.Data;
 using AngularApp.Server.Models;
 using AngularApp.Server.Services;
 
@@ -10,20 +7,20 @@ namespace AngularApp.Server
     public class UserService : IUserService
     {
         private readonly ILogger<UserService> _logger;
-        private readonly IUserRepository _userRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public UserService(ILogger<UserService> logger, IUserRepository userRepository  )
+        public UserService(ILogger<UserService> logger, IUnitOfWork unitOfWork)
         {
             _logger = logger;
-            _userRepository = userRepository;
+            _unitOfWork = unitOfWork;
 
         }
 
         // Minimal, in-memory login stub. Replace with real user store & token generation.
-        public async Task<bool> LoginAsync(UserViewModel model)
+        public async Task<UserViewModel> LoginAsync(UserViewModel model)
         {
             _logger.LogInformation("User logging in: {Email}", model.Username);
-            return await _userRepository.GetUser(model);
+            return await _unitOfWork.User.GetAsync(model);
         }
 
         // Very simple token check for demo purposes

@@ -21,7 +21,10 @@ namespace AngularApp.Server.Controllers
         public async Task<ActionResult<UserViewModel>> Login(UserViewModel userLogin)
         {
             var loginRequest = await _userService.LoginAsync(userLogin);
-            return Ok(loginRequest);
+            if (loginRequest != null)
+                return Ok(loginRequest);
+
+            return Unauthorized();
         }
     }
 }

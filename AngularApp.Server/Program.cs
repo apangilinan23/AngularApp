@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using AngularApp.Server.Data;
 using AngularApp.Server.Services;
 using AngularApp.Server;
+using AngularApp.Server.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,11 +16,9 @@ builder.Services.AddDbContext<WeatherContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // repository
-builder.Services.AddScoped<IRepository<Forecast>, WeatherForecastRepository>();
 builder.Services.AddScoped<IWeatherForecastService, WeatherForecastService>();
-
-builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 

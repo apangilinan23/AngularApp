@@ -7,7 +7,7 @@ using System.Text;
 
 namespace AngularApp.Server.Data
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : IRepository<UserViewModel>
     {
         private readonly WeatherContext _db;
 
@@ -25,9 +25,8 @@ namespace AngularApp.Server.Data
             }).ToListAsync();
         }
 
-        public async Task<bool> GetUser(UserViewModel model)
+        public async Task<UserViewModel> GetAsync(UserViewModel model)
         {
-            bool result = false;
             var users = await _db.User.ToListAsync();
             var user = users.FirstOrDefault(u => string.Equals(u.UserName, model.Username, StringComparison.OrdinalIgnoreCase));
             if (user != null)
@@ -36,10 +35,10 @@ namespace AngularApp.Server.Data
                 byte[] userLoginPassword = encoding.GetBytes(model.Password);
                 if (user.Password.SequenceEqual(userLoginPassword))
                 {
-                    result = true;
+                    model.Result = true;
                 }
             }
-            return result;
+            return model;
         }
 
         public Task<UserViewModel> GetByIdAsync(int id)
@@ -48,6 +47,16 @@ namespace AngularApp.Server.Data
         }
 
         public Task<UserViewModel> GetByIdAsyncz(string email)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<UserViewModel> UpdateAsync(UserViewModel item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> DeleteAsync(UserViewModel item)
         {
             throw new NotImplementedException();
         }

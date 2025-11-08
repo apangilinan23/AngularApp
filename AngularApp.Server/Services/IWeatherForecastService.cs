@@ -7,10 +7,6 @@ namespace AngularApp.Server.Services
     {
         Task<IEnumerable<Forecast>> GetAllAsync();
 
-        Task<Forecast> SaveAsync(Forecast item);
-        //Task<WeatherForecast?> GetByIdAsync(int id);
-        //Task<WeatherForecast> CreateAsync(WeatherForecast forecast);
-        //Task<bool> UpdateAsync(WeatherForecast forecast);
-        //Task<bool> DeleteAsync(int id);
+        Task<Forecast> UpdateAsync(Forecast item);
     }
 }

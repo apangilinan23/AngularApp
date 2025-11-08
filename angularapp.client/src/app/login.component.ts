@@ -28,8 +28,8 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       const { username, password } = this.loginForm.value;
       this.loginService.login(username, password).subscribe({
-        next: (result: boolean) => {
-          if (result) {
+        next: (loginResult: any) => {
+          if (loginResult.result) {
             localStorage.setItem('authToken', `${username}:test-token`);
             this.router.navigate(['/weather']);
           } else {

@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using AngularApp.Server.Data;
 using AngularApp.Server.Services;
 
 namespace AngularApp.Server.Controllers
@@ -9,11 +7,6 @@ namespace AngularApp.Server.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly IWeatherForecastService _weatherForecastService;
         public WeatherForecastController(ILogger<WeatherForecastController> logger, IWeatherForecastService weatherForecastService)
@@ -29,9 +22,9 @@ namespace AngularApp.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<Forecast> Save(Forecast item)
+        public async Task<Forecast> Update(Forecast item)
         {
-            return await _weatherForecastService.SaveAsync(item);
+            return await _weatherForecastService.UpdateAsync(item);
         }
     }
 }

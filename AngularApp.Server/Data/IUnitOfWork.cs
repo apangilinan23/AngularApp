@@ -1,5 +1,4 @@
 ﻿using AngularApp.Server.Models;
-using AngularApp.Server.Services;
 
 namespace AngularApp.Server.Data
 {
@@ -8,6 +7,7 @@ namespace AngularApp.Server.Data
         IRepository<Forecast> Forecast { get; }
 
         IRepository<UserViewModel> User { get; }
+
         Task<int> CompleteAsync();
     }
 }

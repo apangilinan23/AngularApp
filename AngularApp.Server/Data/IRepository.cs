@@ -1,4 +1,4 @@
-﻿namespace AngularApp.Server.Services
+﻿namespace AngularApp.Server.Data
 {
     public interface IRepository<T> where T : class
     {

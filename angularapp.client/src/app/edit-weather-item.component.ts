@@ -41,7 +41,6 @@ export class EditWeatherItemComponent {
       this.forecastService.saveForecast({ ...this.weatherItem, ...this.editForm.value }).subscribe({
         next: (savedForecast) => {
           this.save.emit(savedForecast);
-          // this.save.emit({ ...this.weatherItem, ...this.editForm.value });
         }
       });
     }
